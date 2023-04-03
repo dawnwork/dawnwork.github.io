@@ -1,0 +1,265 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>TypeScript 简单运用(二) | wulays's blog</title><meta name="author" content="wulays"><meta name="copyright" content="wulays"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="TypeScript 简单运用 (二)了解了 TypeScript 的类型注解等之后，这一步里深入一点学习 TypeScript 进阶应用接口(interface)接口(interface)用于描述对象的形状，可以用来定义一些结构化的数据类型，它提供了一种方式来明确对象的形状，包括属性、方法等等。 使用 interface 关键字来声明接口，语法为： 123interface InterfaceN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TypeScript 简单运用(二)">
+<meta property="og:url" content="http://example.com/2023/04/03/TypeScript-%E7%AE%80%E5%8D%95%E8%BF%90%E7%94%A8-2/index.html">
+<meta property="og:site_name" content="wulays&#39;s blog">
+<meta property="og:description" content="TypeScript 简单运用 (二)了解了 TypeScript 的类型注解等之后，这一步里深入一点学习 TypeScript 进阶应用接口(interface)接口(interface)用于描述对象的形状，可以用来定义一些结构化的数据类型，它提供了一种方式来明确对象的形状，包括属性、方法等等。 使用 interface 关键字来声明接口，语法为： 123interface InterfaceN">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://image.wulays.top/2023/cover-004.jpg">
+<meta property="article:published_time" content="2023-04-03T13:21:59.000Z">
+<meta property="article:modified_time" content="2023-04-03T13:29:07.468Z">
+<meta property="article:author" content="wulays">
+<meta property="article:tag" content="TypeScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://image.wulays.top/2023/cover-004.jpg"><link rel="shortcut icon" href="https://image.wulays.top/2023/favicon.ico"><link rel="canonical" href="http://example.com/2023/04/03/TypeScript-%E7%AE%80%E5%8D%95%E8%BF%90%E7%94%A8-2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'TypeScript 简单运用(二)',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-04-03 21:29:07'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://image.wulays.top/2023/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://image.wulays.top/2023/cover-004.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="wulays's blog"><span class="site-name">wulays's blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">TypeScript 简单运用(二)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-03T13:21:59.000Z" title="发表于 2023-04-03 21:21:59">2023-04-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-04-03T13:29:07.468Z" title="更新于 2023-04-03 21:29:07">2023-04-03</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="TypeScript 简单运用(二)"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="TypeScript-简单运用-二"><a href="#TypeScript-简单运用-二" class="headerlink" title="TypeScript 简单运用 (二)"></a>TypeScript 简单运用 (二)</h1><p>了解了 TypeScript 的类型注解等之后，这一步里深入一点学习 TypeScript</p>
+<h2 id="进阶应用"><a href="#进阶应用" class="headerlink" title="进阶应用"></a>进阶应用</h2><h4 id="接口-interface"><a href="#接口-interface" class="headerlink" title="接口(interface)"></a>接口(interface)</h4><p>接口(interface)用于描述对象的形状，可以用来定义一些结构化的数据类型，它提供了一种方式来明确对象的形状，包括属性、方法等等。</p>
+<p>使用 <strong>interface</strong> 关键字来声明接口，语法为：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">InterfaceName</span> &#123;</span><br><span class="line">  <span class="comment">// 定义属性和方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，InterfaceName 表示接口的名称，可以根据需要自行定义，接口的内容包括属性和方法，例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">age</span>: <span class="built_in">number</span>;</span><br><span class="line">  <span class="title function_">sayHello</span>(): <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码定义了一个名为 Person 的接口，它包含了一个 <strong>name</strong> 属性、一个 <strong>age</strong> 属性和一个 <strong>sayHello()</strong> 方法，name 属性的类型为字符串，age 属性的类型为数字，sayHello() 方法没有返回值。</p>
+<p>定义了接口之后，可以使用接口来描述对象类型，例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">person</span>: <span class="title class_">Person</span> = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;Tom&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">  <span class="title function_">sayHello</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Hello!&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码定义了一个名为 <strong>person</strong> 的变量，它的类型为 <strong>Person</strong>，也就是说，它必须包含一个 <strong>name</strong> 属性、一个 <strong>age</strong> 属性和一个 <strong>sayHello()</strong> 方法。</p>
+<p>接口可以用来描述函数类型，例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Func</span> &#123;</span><br><span class="line">  (<span class="attr">x</span>: <span class="built_in">number</span>, <span class="attr">y</span>: <span class="built_in">number</span>): <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码定义了一个名为 Func 的接口，它描述了一个函数类型，这个函数接受两个参数 <strong>x</strong> 和 <strong>y</strong>，它们的类型都为数字，返回值类型也为数字。</p>
+<p>然后，可以使用接口来定义一个函数变量，例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">add</span>: <span class="title class_">Func</span> = <span class="keyword">function</span>(<span class="params">x: <span class="built_in">number</span>, y: <span class="built_in">number</span></span>): <span class="built_in">number</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> x + y;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码定义了一个名为 <strong>add</strong> 的变量，它的类型为 <strong>Func</strong>，也就是说，它必须是一个函数类型，接受两个数字参数并返回一个数字。</p>
+<h4 id="接口和类型别名"><a href="#接口和类型别名" class="headerlink" title="接口和类型别名"></a>接口和类型别名</h4><p>在 TypeScript 中，除了使用 <strong>interface</strong> 来定义接口外，还可以使用 <strong>type</strong> 来定义类型别名(type alias)。虽然两者有些相似，但是它们也有不同之处。</p>
+<p>首先，<strong>interface</strong> 可以被实现(<code>implement</code>)，而 <strong>type</strong> 不能。这意味着可以创建一个类(class)或对象(object)，并使用 <code>implements</code> 关键字来实现一个接口(<strong>interface</strong>)。例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">age</span>: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span> <span class="keyword">implements</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">  name = <span class="string">&quot;Tom&quot;</span>;</span><br><span class="line">  age = <span class="number">18</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上面的示例中，我们定义了一个 <strong>Person</strong> 接口，它有两个属性：<strong>name</strong> 和 <strong>age</strong>。然后，我们创建了一个 <strong>Student</strong> 类，该类实现了 <strong>Person</strong> 接口，因此必须实现 <strong>name</strong> 和 <strong>age</strong> 属性。</p>
+<p>而 <strong>type</strong> 则不能被实现，它只是一个类型别名，用于给一个类型起一个新的名称。例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">Person</span> = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">age</span>: <span class="built_in">number</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="attr">student</span>: <span class="title class_">Person</span> = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;Tom&quot;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">18</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>在上面的示例中，我们使用 <strong>type</strong> 定义了一个 Person 类型别名，它与前面的 <strong>interface</strong> 定义是等价的。然后，我们使用 <strong>Person</strong> 类型别名来定义了一个 <strong>student</strong> 对象。</p>
+<p>除此之外，还有一些细微的差别，比如：</p>
+<p><strong>interface</strong> 可以被合并，而 <strong>type</strong> 不能。这意味着可以在多个地方声明同一个接口，并且它们会被自动合并为一个接口。例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">  <span class="attr">age</span>: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="attr">person</span>: <span class="title class_">Person</span> = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;Tom&quot;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">18</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>在上面的示例中，我们定义了两个名为 <strong>Person</strong> 的接口，它们分别有不同的属性。然后，我们使用 <strong>Person</strong> 接口来定义了一个 <strong>person</strong> 对象，并将它们合并为一个接口。</p>
+<p><strong>type</strong> 支持更多高级的类型操作，比如<strong>交叉类型</strong>(intersection type)和<strong>联合类型</strong>(union type)。例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> A = &#123;</span><br><span class="line">  <span class="attr">x</span>: <span class="built_in">number</span>;</span><br><span class="line">  <span class="attr">y</span>: <span class="built_in">number</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> B = &#123;</span><br><span class="line">  <span class="attr">y</span>: <span class="built_in">number</span>;</span><br><span class="line">  <span class="attr">z</span>: <span class="built_in">number</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> C = A &amp; B; <span class="comment">// 交叉类型，表示同时具有 A 和 B 类型的属性</span></span><br><span class="line"><span class="keyword">type</span> D = A | B; <span class="comment">// 联合类型，表示具有 A 或 B 类型的属性</span></span><br></pre></td></tr></table></figure>
+
+<p>在上面的示例中，我们使用 type 定义了四个类型别名，它们分别表示具有不同属性的类型。其中，C 类型使用了交叉类型(<strong><code>&amp;</code></strong>)来同时具有 A 和 B 类型的属性，而 D 类型使用了联合类型 <strong><code>|</code></strong></p>
+<h4 id="类型推论与类型断言"><a href="#类型推论与类型断言" class="headerlink" title="类型推论与类型断言"></a>类型推论与类型断言</h4><p>在 TypeScript 中，类型推论和类型断言是两个重要的概念。类型推论可以帮助开发人员在一定程度上省略类型注解，提升开发效率。而类型断言则可以帮助开发人员更明确地指定一个值的类型。</p>
+<h6 id="类型推论"><a href="#类型推论" class="headerlink" title="类型推论"></a>类型推论</h6><p>在 TypeScript 中，类型推论机制会在一些没有明确指定类型的地方提供类型。通常情况下，类型推论发生在以下两种场景：</p>
+<ol>
+<li>声明变量并初始化。例如：<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+在这个例子中，变量 num 的类型被推论为 number 类型，因为变量被初始化为一个数字。</li>
+<li>决定函数返回值类型。例如：<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">add</span>(<span class="params">a: <span class="built_in">number</span>, b: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+在这个例子中，函数 add 的返回值类型被推论为 number 类型，因为函数返回的结果是两个数字的和。</li>
+</ol>
+<blockquote>
+<p>在 TS 中，某些没有明确指出类型的地方，TS的类型推论机制会帮助提供类型，也就是说有些地方的类型注解可以不写</p>
+</blockquote>
+<p>在能够推论出类型的情况下，我们可以省略类型注解，从而提升开发效率</p>
+<h6 id="类型断言"><a href="#类型断言" class="headerlink" title="类型断言"></a>类型断言</h6><p>如果在开发中，更明确一个值的类型可以使用类型断言来指定具体类型，当类型太广泛（不具体）的时候就可以使用类型断言，类型断言有两种语法形式：使用 <strong>as</strong> 关键字和使用 <strong>&lt;&gt;</strong> 语法。不过这种方式并不常用，同时这种语法在写 <strong>JSX</strong> 时有冲突</p>
+<p>假设有一个 HTML 页面中的链接元素：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">id</span>=<span class="string">&quot;link&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://www.example.com&quot;</span>&gt;</span>Example Website<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>可以通过以下代码获取这个元素：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> linkElement = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;link&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>然而，<strong>linkElement</strong> 变量的类型被推论为 <strong>HTMLElement</strong> 类型，这个类型并不具体，无法操作 <strong>href</strong> 等特有属性。</p>
+<p>这个时候，我们可以使用类型断言将 <strong>linkElement</strong> 的类型断言为 <strong>HTMLAnchorElement</strong> 类型：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> aLink = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;link&#x27;</span>) <span class="keyword">as</span> <span class="title class_">HTMLAnchorElement</span></span><br><span class="line"><span class="comment">//这个时候就可以使用类型断言，因为默认是 HTMLElement类型，这个类型并不具体，无法操作href 等特有属性</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(aLink.<span class="property">href</span>)</span><br></pre></td></tr></table></figure>
+
+<p>或者使用 <strong>&lt;&gt;</strong> 语法：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> aLink1 = &lt;<span class="title class_">HTMLAnchorElement</span>&gt;<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;link&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(aLink1.<span class="property">href</span>)</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，虽然类型断言可以帮助我们更明确地指定一个值的类型，但是过度使用类型断言可能会导致代码变得不安全，因为类型断言不会进行类型检查。此外，在写 JSX 时， <strong>&lt;&gt;</strong> 语法有可能与 <strong>JSX</strong> 的语法发生冲突，所以推荐使用 <strong>as</strong> 关键字进行类型断言。</p>
+<h6 id="字面量类型"><a href="#字面量类型" class="headerlink" title="字面量类型"></a>字面量类型</h6><p>在 TypeScript 中，字面量类型是一种特殊的类型，可以用来表示一个固定的值。具体来说，字面量类型是指由字面量组成的类型，例如字符串字面量类型、数字字面量类型、布尔字面量类型等等</p>
+<p>下面是一个使用字符串字面量类型的例子：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str1 = <span class="string">&#x27;Hello&#x27;</span> <span class="comment">// 变量类型 string</span></span><br><span class="line"><span class="keyword">const</span> str2 = <span class="string">&#x27;Hello&#x27;</span> <span class="comment">// 变量类型 &#x27;Hello&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，变量 str1 的类型被推论为 <strong>string</strong> 类型，因为它是一个字符串变量。而变量 str2 因为是 <strong>常量</strong> 所以类型被指定为 <code>&#39;Hello&#39;</code>，这就是一个字符串字面量类型。</p>
+<p>字面量类型可以和联合类型一起使用，用于表示一个可选值列表。例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">test</span>(<span class="params"><span class="keyword">type</span>: <span class="string">&#x27;A&#x27;</span> | <span class="string">&#x27;B&#x27;</span> | <span class="string">&#x27;C&#x27;</span></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">type</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">test</span>(<span class="string">&quot;A&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>相比于直接使用 <code>string</code> 类型使用字面量类型更加精准、严谨</p>
+<h4 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h4><p>枚举是 TypeScript 提供的一种特殊数据类型，它表示一组明确的可选值，定义一组命名常量。</p>
+<p>功能类似于字面量 + 联合类型的组合功能，表示一组明确的可选值，定义一组命名常量 使用 <strong>enum</strong> 关键字定义枚举，枚举名称约定以大写字母开头，多个值使用 <code>,</code> 分隔</p>
+<p>枚举默认是从0开始自增的数，这种被称为数字枚举。<br>当然也可以给枚举初始化值使用 <code>=</code>, 字符串是没有自增长行为的，所以如果是字符串则每个都需要初始化值</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">Type1</span> &#123;</span><br><span class="line">    A,</span><br><span class="line">    B,</span><br><span class="line">    C,</span><br><span class="line">    D = <span class="number">9</span>,</span><br><span class="line">    E</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">test</span>(<span class="params"><span class="keyword">type</span>: Type1</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">type</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">test</span>(<span class="title class_">Type1</span>.<span class="property">D</span>)</span><br></pre></td></tr></table></figure>
+
+<p>枚举不仅可以用作类型，还提供了值，每个枚举成员都是有值的。如果需要获取枚举成员的值，可以通过枚举名称和成员名称来访问：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">Color</span> &#123;</span><br><span class="line">  <span class="title class_">Red</span> = <span class="string">&#x27;#f00&#x27;</span>,</span><br><span class="line">  <span class="title class_">Green</span> = <span class="string">&#x27;#0f0&#x27;</span>,</span><br><span class="line">  <span class="title class_">Blue</span> = <span class="string">&#x27;#00f&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Color</span>.<span class="property">Red</span>); <span class="comment">// 输出：#f00</span></span><br></pre></td></tr></table></figure>
+
+<p>一般情况下，推荐使用字面量类型加联合类型的组合方式，因为相比枚举更为直观、高效和简洁</p>
+<h4 id="any-类型-与-typeof-操作符"><a href="#any-类型-与-typeof-操作符" class="headerlink" title="any 类型 与 typeof 操作符"></a>any 类型 与 typeof 操作符</h4><h6 id="any-类型"><a href="#any-类型" class="headerlink" title="any 类型"></a>any 类型</h6><p>任何类型都可以被赋值给 <strong>any</strong> 类型，也可以使用 <strong>any</strong> 类型来声明变量或参数，<strong>any</strong> 类型可以包含任何值，可以通过编译检查。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">a</span>: <span class="built_in">any</span> = <span class="number">1</span>;</span><br><span class="line">a = <span class="string">&#x27;Hello&#x27;</span>;</span><br><span class="line">a = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+
+<p>但是，过多使用 <strong>any</strong> 会失去TS类型保护的优势，类型检查器会认为这些变量或函数参数可以包含任何值，不能提供类型保护。</p>
+<blockquote>
+<p>原则：不推荐使用 <strong>any</strong>，这会失去TS类型保护优势，尽可能的避免使用 <strong>any</strong> 类型和<strong>隐式any</strong>，这两种情况都应该手动提供类型</p>
+</blockquote>
+<ol>
+<li>声明变量不提供默认值并且不指定类型</li>
+<li>函数形参不指定类型</li>
+</ol>
+<h6 id="typeof-操作符"><a href="#typeof-操作符" class="headerlink" title="typeof 操作符"></a>typeof 操作符</h6><p><strong>typeof</strong> 操作符可以在类型上下文中引用变量或属性的类型。它接受一个参数，并返回该参数的类型。通常，在声明变量时可以使用 <strong>typeof</strong> 操作符来获取变量的类型并将其指定为类型注释。例如</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> x = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="attr">y</span>: <span class="keyword">typeof</span> x = <span class="number">20</span>; <span class="comment">// y的类型被推断为 number 类型</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>typeof</strong> 操作符也可以用于获取属性的类型，例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> person = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;Alice&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">30</span>,</span><br><span class="line">  <span class="attr">gender</span>: <span class="string">&#x27;female&#x27;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">Person</span> = <span class="keyword">typeof</span> person; <span class="comment">// Person的类型被推断为 &#123;name: string, age: number, gender: string&#125; 类型</span></span><br></pre></td></tr></table></figure>
+
+<p>当属性名使用模板字符串时，需要使用 <strong>keyof</strong> 操作符来获取属性名的联合类型，例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">PersonKeys</span> = keyof <span class="keyword">typeof</span> person; <span class="comment">// PersonKeys的类型被推断为 &#x27;name&#x27; | &#x27;age&#x27; | &#x27;gender&#x27; 类型</span></span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">wulays</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/04/03/TypeScript-%E7%AE%80%E5%8D%95%E8%BF%90%E7%94%A8-2/">http://example.com/2023/04/03/TypeScript-%E7%AE%80%E5%8D%95%E8%BF%90%E7%94%A8-2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">wulays's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/TypeScript/">TypeScript</a></div><div class="post_share"><div class="social-share" data-image="https://image.wulays.top/2023/cover-004.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/04/03/TypeScript-%E7%AE%80%E5%8D%95%E8%BF%90%E7%94%A8-1/" title="TypeScript 简单运用 (一)"><img class="cover" src="https://image.wulays.top/2023/cover-003.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">TypeScript 简单运用 (一)</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/04/03/TypeScript-%E7%AE%80%E5%8D%95%E8%BF%90%E7%94%A8-1/" title="TypeScript 简单运用 (一)"><img class="cover" src="https://image.wulays.top/2023/cover-003.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-03</div><div class="title">TypeScript 简单运用 (一)</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://image.wulays.top/2023/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">wulays</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/wulays"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">还是再次重启 Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TypeScript-%E7%AE%80%E5%8D%95%E8%BF%90%E7%94%A8-%E4%BA%8C"><span class="toc-number">1.</span> <span class="toc-text">TypeScript 简单运用 (二)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6%E5%BA%94%E7%94%A8"><span class="toc-number">1.1.</span> <span class="toc-text">进阶应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3-interface"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">接口(interface)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E5%92%8C%E7%B1%BB%E5%9E%8B%E5%88%AB%E5%90%8D"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">接口和类型别名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E6%8E%A8%E8%AE%BA%E4%B8%8E%E7%B1%BB%E5%9E%8B%E6%96%AD%E8%A8%80"><span class="toc-number">1.1.0.3.</span> <span class="toc-text">类型推论与类型断言</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E6%8E%A8%E8%AE%BA"><span class="toc-number">1.1.0.3.0.1.</span> <span class="toc-text">类型推论</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E6%96%AD%E8%A8%80"><span class="toc-number">1.1.0.3.0.2.</span> <span class="toc-text">类型断言</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%AD%97%E9%9D%A2%E9%87%8F%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.1.0.3.0.3.</span> <span class="toc-text">字面量类型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9E%9A%E4%B8%BE"><span class="toc-number">1.1.0.4.</span> <span class="toc-text">枚举</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#any-%E7%B1%BB%E5%9E%8B-%E4%B8%8E-typeof-%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">1.1.0.5.</span> <span class="toc-text">any 类型 与 typeof 操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#any-%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.1.0.5.0.1.</span> <span class="toc-text">any 类型</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#typeof-%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">1.1.0.5.0.2.</span> <span class="toc-text">typeof 操作符</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/04/03/TypeScript-%E7%AE%80%E5%8D%95%E8%BF%90%E7%94%A8-2/" title="TypeScript 简单运用(二)"><img src="https://image.wulays.top/2023/cover-004.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="TypeScript 简单运用(二)"/></a><div class="content"><a class="title" href="/2023/04/03/TypeScript-%E7%AE%80%E5%8D%95%E8%BF%90%E7%94%A8-2/" title="TypeScript 简单运用(二)">TypeScript 简单运用(二)</a><time datetime="2023-04-03T13:21:59.000Z" title="发表于 2023-04-03 21:21:59">2023-04-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/04/03/TypeScript-%E7%AE%80%E5%8D%95%E8%BF%90%E7%94%A8-1/" title="TypeScript 简单运用 (一)"><img src="https://image.wulays.top/2023/cover-003.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="TypeScript 简单运用 (一)"/></a><div class="content"><a class="title" href="/2023/04/03/TypeScript-%E7%AE%80%E5%8D%95%E8%BF%90%E7%94%A8-1/" title="TypeScript 简单运用 (一)">TypeScript 简单运用 (一)</a><time datetime="2023-04-03T13:01:55.000Z" title="发表于 2023-04-03 21:01:55">2023-04-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/21/Git%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B/" title="Git简单上手"><img src="https://image.wulays.top/2023/cover-002.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git简单上手"/></a><div class="content"><a class="title" href="/2023/03/21/Git%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B/" title="Git简单上手">Git简单上手</a><time datetime="2023-03-21T13:53:36.000Z" title="发表于 2023-03-21 21:53:36">2023-03-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/20/%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%B7%A5%E4%BD%9C%E7%9A%84%E6%84%8F%E4%B9%89/" title="学习与工作的意义"><img src="https://image.wulays.top/2023/cover-001.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="学习与工作的意义"/></a><div class="content"><a class="title" href="/2023/03/20/%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%B7%A5%E4%BD%9C%E7%9A%84%E6%84%8F%E4%B9%89/" title="学习与工作的意义">学习与工作的意义</a><time datetime="2023-03-20T11:43:49.000Z" title="发表于 2023-03-20 19:43:49">2023-03-20</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By wulays</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
